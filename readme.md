@@ -1,5 +1,31 @@
 # Heroku Buildpack: NGINX
 
+## Building New nginx version
+
+We can recompile a version of this file using a heroku-like ubuntu version.
+
+### Create Vagrant Box
+```
+vagrant up
+vagrant ssh
+```
+
+### Build nginx inside of VM
+Inside the vagrant box
+```
+cd /vagrant
+./scripts/build_nginx.sh
+```
+
+### Copy nginx executable to repo
+After the installation is finished, there should be an nginx executable inside of
+`/tmp/nginx/sbin`, which you should copy to the `/vagrant/bin` directory.
+```
+cp /tmp/nginx/sbin/nginx /vagrant/bin/nginx-cedar-14
+```
+
+Commit the new executable and you are done.
+
 Nginx-buildpack vendors NGINX inside a dyno and connects NGINX to an app server via UNIX domain sockets.
 
 ## Motivation
